@@ -1,10 +1,9 @@
-class opal::install  {
+class opal::install($change_password=false)  {
 
   class {'opal::repository': before => [Package['opal'], Package['opal-rserver'], Package['opal-python-client']]}
 
   case $::operatingsystem {
     'Ubuntu': {
-      $opal_admin_password_hash = '$shiro1$SHA-256$500000$gcnVxdEmOjaN+NfsK/1NsA==$UOobbhJsBBojnbsfzIBX9GTWjWQFi8aJZxFvFKmOiSE='
       package { 'opal':
         ensure  => 'present',
         require => Class['::r']
@@ -15,7 +14,6 @@ class opal::install  {
       }
     }
     'Centos': {
-      $opal_admin_password_hash = '$shiro1$SHA-256$500000$5Zx3jiOtGFLYYqboKSgFgQ==$qUiuEUIMsEfVash4nqtr8A94/GD6B8Kdlv8bll3wg2M='
       package { 'opal-server':
         ensure  => 'present',
         require => Class['::r'],
@@ -42,14 +40,25 @@ class opal::install  {
           enable => true,
   }
 
-  file { '/var/lib/opal/conf/shiro.ini':
-    content => template('opal/shiro.erb'),
-    ensure  => file,
-    owner   => opal,
-    group   => adm,
-    mode    => '640',
-    require => Package['opal'],
-    notify => Service['opal']
+  # Bug fix for opal and rserver not setting home directory correctly
+
+  case $::operatingsystem {
+    'Centos': {
+      file {'/home/rserver':
+        ensure => link,
+        target => "/var/lib/rserver",
+        require => Service['rserver']
+      }
+      file {'/home/opal':
+        ensure => link,
+        target => "/var/lib/opal",
+        require => Service['opal']
+      }
+    }
+
   }
+
+
+  class {opal::update_admin_password: change_password => $change_password}
 
 }
