@@ -42,24 +42,6 @@ class opal::install($opal_password='password', $opal_password_hash = '$shiro1$SH
           enable => true,
   }
 
-  # Bug fix for opal and rserver not setting home directory correctly
-
-  case $::operatingsystem {
-    'Centos': {
-      file {'/home/rserver':
-        ensure => link,
-        target => "/var/lib/rserver",
-        require => Service['rserver']
-      }
-      file {'/home/opal':
-        ensure => link,
-        target => "/var/lib/opal",
-        require => Service['opal']
-      }
-    }
-
-  }
-
   class {opal::update_admin_password: opal_password_hash => $opal_password_hash} ->
   wait_for { 'curl -s -o /dev/null localhost:8080':
     exit_code         => 0,
