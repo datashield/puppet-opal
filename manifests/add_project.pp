@@ -1,6 +1,6 @@
-define opal::add_project($opal_path = '/usr/bin/opal', $opal_password = 'password', $payload="") {
+define opal::add_project($opal_path = '/usr/bin/opal', $opal_password = 'password', $database="mongodb", $description) {
 
-  # include ::opal::update_admin_password
+  $payload = "{\\\"name\\\": \\\"${name}\\\", \\\"title\\\": \\\"${name}\\\", \\\"description\\\": \\\"$description\\\", \\\"database\\\": \\\"$database\\\" }"
 
   exec { "register_db_${name}":
     command => "/usr/bin/env echo \"${payload}\" | ${opal_path} rest -o http://localhost:8080 -u administrator -p '${opal_password}' -m  POST /projects --content-type \"application/json\"",
