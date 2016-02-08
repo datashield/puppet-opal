@@ -7,7 +7,7 @@ class opal::install($opal_password='password', $opal_password_hash = '$shiro1$SH
   case $::operatingsystem {
     'Ubuntu': {
       package { 'opal':
-        ensure  => 'present',
+        ensure  => latest,
         require => Class['::r']
       } ~>
       service { 'opal':
@@ -17,7 +17,7 @@ class opal::install($opal_password='password', $opal_password_hash = '$shiro1$SH
     }
     'Centos': {
       package { 'opal-server':
-        ensure  => 'present',
+        ensure  => latest,
         require => Class['::r'],
         alias  => 'opal'
       } ~>
@@ -29,12 +29,12 @@ class opal::install($opal_password='password', $opal_password_hash = '$shiro1$SH
   }
 
   package {'opal-python-client':
-    ensure => 'latest',
+    ensure => latest,
     require => Package['opal']
   }
 
   package {'opal-rserver':
-    ensure => 'latest',
+    ensure => latest,
     require => Package['opal']
   } ~>
   service { 'rserver':
