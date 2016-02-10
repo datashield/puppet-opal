@@ -1,4 +1,4 @@
-define opal::db_register($opal_path = '/usr/bin/opal', $opal_password = 'password', $db='mysql', $usedForIdentifiers='false', $usage="STORAGE",
+define opal::database($opal_path = '/usr/bin/opal', $opal_password = 'password', $db='mysql', $usedForIdentifiers='false', $usage="STORAGE",
                          $defaultStorage = 'false', $url, $username='', $password='') {
 
   if ($db == 'mysql'){
