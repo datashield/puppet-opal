@@ -1,4 +1,4 @@
-define opal::datashield_install($r_path = '/usr/bin/R', $opal_password = 'password') {
+define opal::datashield_server($r_path = '/usr/bin/R', $opal_password = 'password') {
 
   include ::r
 
