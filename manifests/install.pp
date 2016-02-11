@@ -1,4 +1,5 @@
-class opal::install($opal_password='password', $opal_password_hash = '$shiro1$SHA-256$500000$dxucP0IgyO99rdL0Ltj1Qg==$qssS60kTC7TqE61/JFrX/OEk0jsZbYXjiGhR7/t+XNY=')  {
+class opal::install($opal_password='password', $opal_url='http://localhost:8080',
+  $opal_password_hash = '$shiro1$SHA-256$500000$dxucP0IgyO99rdL0Ltj1Qg==$qssS60kTC7TqE61/JFrX/OEk0jsZbYXjiGhR7/t+XNY=')  {
 
   include wait_for
 
@@ -43,13 +44,13 @@ class opal::install($opal_password='password', $opal_password_hash = '$shiro1$SH
   }
 
   class { ::opal::admin_password: opal_password_hash => $opal_password_hash } ->
-  wait_for { 'curl --fail -s -o /dev/null localhost:8080':
+  wait_for { "curl --fail -s -o /dev/null ${$opal_url}":
     exit_code         => 0,
     polling_frequency => 15.0,
     max_retries       => 20,
   } ->
   exec { 'opal_login' :
-    command => "opal system --opal http://localhost:8080 --user administrator --password '${opal_password}' --conf",
+    command => "opal system --opal ${$opal_url} --user administrator --password '${opal_password}' --conf",
     path    => "/usr/bin:/bin",
   }
 
