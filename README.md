@@ -87,9 +87,9 @@ define opal::database($opal_path = '/usr/bin/opal', $opal_password = 'password',
   $usedForIdentifiers='false', $usage='STORAGE', $defaultStorage = 'false', $url, $username='', $password='')
 ```
 Type to register a database with Opal. `$opal_path` is the path to the opal bin. `$opal_password` is the opal admin 
-password. `$db` is the type of database and can be 'mysql' or 'mongodb'. `$usedForIdentifiers` is a string and definds if
+password. `$db` is the type of database and can be 'mysql' or 'mongodb'. `$usedForIdentifiers` definds if
 the database is an identifier database. `$usage` is the usage of the database, default 'STORAGE'. `$defaultStorage` is
-a string and defines if this is the default database storage. `$url` defines the url of the database server, for example
+defines if this is the default database storage. `$url` defines the url of the database server, for example
 'mongodb://localhost:27017/opal_ids'. `$username` is the username for the database server, and `$password` is the password
 for the database server. `$opal_url` is the url of the opal REST server.
 
