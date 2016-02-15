@@ -1,3 +1,22 @@
+# Class: opal::repository
+# ===========================
+#
+# Installs the yum and apt-get source repo for Opal
+#
+#
+# Examples
+# --------
+#
+# @example
+#    class { 'opal::repository':
+#    }
+#
+# Authors
+# -------
+#
+# Neil Parley
+#
+
 class opal::repository {
 
   case $::operatingsystem {
@@ -7,8 +26,8 @@ class opal::repository {
         location    => 'http://pkg.obiba.org',
         release     => 'stable/',
         repos       => '',
-        key => { 'source' => 'http://pkg.obiba.org/obiba.org.key', 'id' =>  'B5719EDAB71FF8E6F6D008D95991857D7A49E499'},
-        include => { 'src' => false },
+        key         => { 'source' => 'http://pkg.obiba.org/obiba.org.key', 'id' =>  'B5719EDAB71FF8E6F6D008D95991857D7A49E499' },
+        include     => { 'src' => false },
         notify      => Class['apt::update'],
       }
     }

@@ -1,3 +1,59 @@
+# Type: opal::database
+# ===========================
+#
+# Register a database with Opal. $name will be the database name in Opal.
+#
+# Parameters
+# ----------
+#
+# * `opal_path`
+# Path to the opal binary. Default: '/usr/bin/opal'
+#
+# * `opal_password`
+# Opal admin password. Default is 'password'
+#
+# * `opal_url`
+# URL of the Opal REST server. Default is 'http://localhost:8080'
+#
+# * `db`
+# Type of database, can be 'mysql' or 'mongodb'. Default is 'mysql'.
+#
+# * `usedForIdentifiers`
+# If the database is going to be used as an identifier database. Default is false
+#
+# * `usage`
+# The usage of the database. Default is 'STORAGE'
+#
+# * `defaultStorage`
+# If the database will be used as the default storage. Default is false
+#
+# * `url`
+# The database connection URL for example: 'mongodb://localhost:27017/opal_data'
+#
+# * `username`
+# The database username
+#
+# * `password`
+# The database password
+#
+# Examples
+# --------
+#
+# @example
+# ::opal::database { 'mongodb':
+#   opal_password      => $opal_password,
+#   db                 => 'mongodb',
+#   usedForIdentifiers => false,
+#   defaultStorage     => true,
+#   url                => 'mongodb://localhost:27017/opal_data'
+# }
+#
+# Authors
+# -------
+#
+# Neil Parley
+#
+
 define opal::database($opal_path = '/usr/bin/opal', $opal_password = 'password', $opal_url='http://localhost:8080', $db='mysql',
   $usedForIdentifiers=false, $usage='STORAGE', $defaultStorage = false, $url, $username='', $password='') {
 
