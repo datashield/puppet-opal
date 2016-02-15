@@ -15,7 +15,7 @@
 # * `opal_url`
 # URL of the Opal REST server. Default is 'http://localhost:8080'
 #
-# * `db`
+# * `db_type`
 # Type of database, can be 'mysql' or 'mongodb'. Default is 'mysql'.
 #
 # * `usedForIdentifiers`
@@ -42,7 +42,7 @@
 # @example
 # ::opal::database { 'mongodb':
 #   opal_password      => $opal_password,
-#   db                 => 'mongodb',
+#   db_type            => 'mongodb',
 #   usedForIdentifiers => false,
 #   defaultStorage     => true,
 #   url                => 'mongodb://localhost:27017/opal_data'
@@ -54,18 +54,18 @@
 # Neil Parley
 #
 
-define opal::database($opal_path = '/usr/bin/opal', $opal_password = 'password', $opal_url='http://localhost:8080', $db='mysql',
+define opal::database($opal_path = '/usr/bin/opal', $opal_password = 'password', $opal_url='http://localhost:8080', $db_type='mysql',
   $usedForIdentifiers=false, $usage='STORAGE', $defaultStorage = false, $url, $username='', $password='') {
 
   $usedForIdentifiers_str = bool2str($usedForIdentifiers)
   $defaultStorage_str = bool2str($defaultStorage)
 
-  if ($db == 'mysql'){
+  if ($db_type == 'mysql'){
     $payload = "{\\\"usedForIdentifiers\\\": ${usedForIdentifiers_str}, \\\"name\\\": \\\"${name}\\\", \\\"usage\\\": \\\"${usage}\\\",
     \\\"defaultStorage\\\": ${defaultStorage_str}, \\\"sqlSettings\\\": {
     \\\"url\\\": \\\"${url}\\\", \\\"driverClass\\\": \\\"com.mysql.jdbc.Driver\\\", \\\"username\\\": \\\"${username}\\\",
     \\\"password\\\": \\\"${password}\\\", \\\"properties\\\": \\\"\\\", \\\"sqlSchema\\\": \\\"HIBERNATE\\\" }}"
-  } elsif ($db == 'mongodb'){
+  } elsif ($db_type == 'mongodb'){
     $payload = "{\\\"usedForIdentifiers\\\": ${usedForIdentifiers_str}, \\\"name\\\": \\\"${name}\\\", \\\"usage\\\": \\\"${usage}\\\",
     \\\"defaultStorage\\\": ${defaultStorage_str}, \\\"mongoDbSettings\\\": {\\\"url\\\": \\\"${url}\\\",
     \\\"username\\\": \\\"${username}\\\", \\\"password\\\": \\\"${password}\\\", \\\"properties\\\": \\\"\\\"}}"
