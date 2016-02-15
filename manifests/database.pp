@@ -13,6 +13,8 @@ define opal::database($opal_path = '/usr/bin/opal', $opal_password = 'password',
     $payload = "{\\\"usedForIdentifiers\\\": ${usedForIdentifiers_str}, \\\"name\\\": \\\"${name}\\\", \\\"usage\\\": \\\"${usage}\\\",
     \\\"defaultStorage\\\": ${defaultStorage_str}, \\\"mongoDbSettings\\\": {\\\"url\\\": \\\"${url}\\\",
     \\\"username\\\": \\\"${username}\\\", \\\"password\\\": \\\"${password}\\\", \\\"properties\\\": \\\"\\\"}}"
+  } else {
+    fail("Database type not available")
   }
 
   exec { "register_db_${name}":
