@@ -15,6 +15,9 @@
 # * `opal_url`
 # URL of the Opal REST server. Default is 'http://localhost:8080'
 #
+# * `opal_release`
+# Relase branch of the opal to be installed from the package repo. Default is 'stable'
+#
 # Examples
 # --------
 #
@@ -30,12 +33,14 @@
 # Neil Parley
 #
 
-class opal::install($opal_password='password', $opal_url='http://localhost:8080',
+class opal::install($opal_password='password', $opal_url='http://localhost:8080', $opal_release='stable',
   $opal_password_hash = '$shiro1$SHA-256$500000$dxucP0IgyO99rdL0Ltj1Qg==$qssS60kTC7TqE61/JFrX/OEk0jsZbYXjiGhR7/t+XNY=')  {
 
   include wait_for
 
-  class { 'opal::repository': before => [Package['opal'], Package['opal-rserver'], Package['opal-python-client']] }
+  class { 'opal::repository':
+    before  => [Package['opal'], Package['opal-rserver'], Package['opal-python-client']],
+    release => $opal_release }
 
   case $::operatingsystem {
     'Ubuntu': {

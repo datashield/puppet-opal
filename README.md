@@ -96,12 +96,12 @@ for the database server. `$opal_url` is the url of the opal REST server.
 ### opal::install
 
 ```puppet
-class opal::install($opal_password='password', $opal_url='http://localhost:8080',
-  $opal_password_hash = '$shiro1$SHA-256$500000$dxucP0IgyO99rdL0Ltj1Qg==$qssS60kTC7TqE61/JFrX/OEk0jsZbYXjiGhR7/t+XNY=')
+class opal::install($opal_password='password', $opal_url='http://localhost:8080', $opal_release='stable',
+  $opal_password_hash = '$shiro1$SHA-256$500000$dxucP0IgyO99rdL0Ltj1Qg==$qssS60kTC7TqE61/JFrX/OEk0jsZbYXjiGhR7/t+XNY=') 
 ```
 Installs Opal and starts the Opal and rserve service. Changes the admin password to `$opal_password_hash`, default is the
 default Opal password. Checks that the Opal web server is run and the REST interface accepts requests. `$opal_url` is the
-url of the opal REST server.
+url of the opal REST server. `$opal_release` is the opal branch to install from the package repo, default is stable.
 
 ### opal::project
 
@@ -115,9 +115,10 @@ is text about the project. `$opal_url` is the url of the opal REST server.
 ### opal::repository
 
 ```puppet
-class opal::repository
+class opal::repository ($release = 'stable')
 ```
-Class to install the Opal yum or apt-get source repos onto the system.
+Class to install the Opal yum or apt-get source repos onto the system. `$relaese` is the opal branch to install from the 
+package repo, default is stable. 
 
 ## Limitations
 
