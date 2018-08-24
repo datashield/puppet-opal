@@ -71,7 +71,7 @@ class opal::install($opal_password='password', $opal_url='http://localhost:8080'
     require => Package['opal']
   }
 
-  package { 'opal-rserver':
+  package { 'rserver-admin':
     ensure  => latest,
     require => Package['opal']
   } ~>
