@@ -39,7 +39,7 @@ class opal::install($opal_password='password', $opal_url='http://localhost:8080'
   include wait_for
 
   class { 'opal::repository':
-    before  => [Package['opal'], Package['opal-rserver'], Package['opal-python-client']],
+    before  => [Package['opal'], Package['rserver-admin'], Package['opal-python-client']],
     release => $opal_release }
 
   case $::operatingsystem {
