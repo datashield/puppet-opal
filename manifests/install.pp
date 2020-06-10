@@ -83,8 +83,8 @@ class opal::install($opal_password='password', $opal_url='http://localhost:8080'
   class { ::opal::admin_password: opal_password_hash => $opal_password_hash } ->
   wait_for { "curl --fail -s -o /dev/null ${$opal_url}":
     exit_code         => 0,
-    polling_frequency => 5.0,
-    max_retries       => 20,
+    polling_frequency => 15.0,
+    max_retries       => 50,
   } ->
   exec { 'opal_login' :
     command => "opal system --opal ${$opal_url} --user administrator --password '${opal_password}' --conf",
