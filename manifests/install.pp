@@ -39,7 +39,7 @@ class opal::install($opal_password='password', $opal_url='http://localhost:8080'
   include wait_for
 
   class { 'opal::repository':
-    before  => [Package['opal'], Package['opal-rserver'], Package['opal-python-client']],
+    before  => [Package['opal'], Package['rserver-admin'], Package['opal-python-client']],
     release => $opal_release }
 
   case $::operatingsystem {
@@ -71,7 +71,7 @@ class opal::install($opal_password='password', $opal_url='http://localhost:8080'
     require => Package['opal']
   }
 
-  package { 'opal-rserver':
+  package { 'rserver-admin':
     ensure  => latest,
     require => Package['opal']
   } ~>
@@ -84,7 +84,7 @@ class opal::install($opal_password='password', $opal_url='http://localhost:8080'
   wait_for { "curl --fail -s -o /dev/null ${$opal_url}":
     exit_code         => 0,
     polling_frequency => 15.0,
-    max_retries       => 20,
+    max_retries       => 50,
   } ->
   exec { 'opal_login' :
     command => "opal system --opal ${$opal_url} --user administrator --password '${opal_password}' --conf",

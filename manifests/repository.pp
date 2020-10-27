@@ -28,12 +28,13 @@ class opal::repository ($release = 'stable') {
     'Ubuntu': {
       include ::apt
       apt::source { 'obiba':
-        location    => 'http://pkg.obiba.org',
-        release     => "$release/",
-        repos       => '',
-        key         => { 'source' => 'http://pkg.obiba.org/obiba.org.key', 'id' =>  'B5719EDAB71FF8E6F6D008D95991857D7A49E499' },
-        include     => { 'src' => false },
-        notify      => Class['apt::update'],
+        location       => 'https://dl.bintray.com/obiba/deb',
+        release        => '',
+        repos          => 'all main',
+        key            => { 'server' => 'hkp://keyserver.ubuntu.com:80', 'id' => '379CE192D401AB61' },
+        include        => { 'src' => false },
+        notify         => Class['apt::update'],
+        allow_unsigned => false,
       }
     }
     'Centos': {
