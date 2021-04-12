@@ -35,7 +35,7 @@ class opal::admin_password($opal_password_hash = '$shiro1$SHA-256$500000$dxucP0I
     group   => adm,
     mode    => '640',
     require => Package['opal'],
-    notify  => [Service['opal'], Service['rserver']]
+    notify  => [Service['opal'], Service['rock']]
   }
 
 }
