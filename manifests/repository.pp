@@ -28,7 +28,7 @@ class opal::repository ($release = 'stable') {
     'Ubuntu': {
       include ::apt
       apt::source { 'obiba':
-        location       => 'https://dl.bintray.com/obiba/deb',
+        location       => 'https://obiba.jfrog.io/artifactory/debian-local',
         release        => '',
         repos          => 'all main',
         key            => { 'server' => 'hkp://keyserver.ubuntu.com:80', 'id' => '379CE192D401AB61' },
