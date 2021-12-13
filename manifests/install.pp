@@ -81,7 +81,7 @@ class opal::install($opal_password='password', $opal_url='https://localhost:8443
   }
 
   class { ::opal::admin_password: opal_password_hash => $opal_password_hash } ->
-  wait_for { "curl --fail -s -o /dev/null ${$opal_url}":
+  wait_for { "curl --insecure --fail -s -o /dev/null ${$opal_url}":
     exit_code         => 0,
     polling_frequency => 15.0,
     max_retries       => 50,
