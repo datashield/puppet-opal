@@ -13,7 +13,7 @@
 # Opal admin password. Default is 'password'
 #
 # * `opal_url`
-# URL of the Opal REST server. Default is 'http://localhost:8080'
+# URL of the Opal REST server. Default is 'https://localhost:8443'
 #
 # * `db_type`
 # Type of database, can be 'mysql' or 'mongodb'. Default is 'mysql'.
@@ -54,7 +54,7 @@
 # Neil Parley
 #
 
-define opal::database($opal_path = '/usr/bin/opal', $opal_password = 'password', $opal_url='http://localhost:8080', $db_type='mysql',
+define opal::database($opal_path = '/usr/bin/opal', $opal_password = 'password', $opal_url='https://localhost:8443', $db_type='mysql',
   $usedForIdentifiers=false, $usage='STORAGE', $defaultStorage = false, $url, $username='', $password='') {
 
   $usedForIdentifiers_str = bool2str($usedForIdentifiers)

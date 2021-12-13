@@ -74,7 +74,7 @@ a password hash). The default password hash is the default hash for Opal on inst
 ### opal::data
 
 ```puppet
-define opal::data($opal_path = '/usr/bin/opal', $opal_password = 'password', $opal_url='http://localhost:8080', $path="")
+define opal::data($opal_path = '/usr/bin/opal', $opal_password = 'password', $opal_url='https://localhost:8443', $path="")
 ```
 Data type to import data into opal. Name must match an `opal::project` name. `$opal_path` is the path to the
 opal bin. `$opal_password` is the opal admin password. `$path` is the path to the zip file containing the opal
@@ -83,7 +83,7 @@ data. `$opal_url` is the url of the opal REST server.
 ### opal::database
 
 ```puppet
-define opal::database($opal_path = '/usr/bin/opal', $opal_password = 'password', $opal_url='http://localhost:8080', $db='mysql',
+define opal::database($opal_path = '/usr/bin/opal', $opal_password = 'password', $opal_url='https://localhost:8443', $db='mysql',
   $usedForIdentifiers='false', $usage='STORAGE', $defaultStorage = 'false', $url, $username='', $password='')
 ```
 Type to register a database with Opal. `$opal_path` is the path to the opal bin. `$opal_password` is the opal admin 
@@ -96,7 +96,7 @@ for the database server. `$opal_url` is the url of the opal REST server.
 ### opal::install
 
 ```puppet
-class opal::install($opal_password='password', $opal_url='http://localhost:8080', $opal_release='stable',
+class opal::install($opal_password='password', $opal_url='https://localhost:8443', $opal_release='stable',
   $opal_password_hash = '$shiro1$SHA-256$500000$dxucP0IgyO99rdL0Ltj1Qg==$qssS60kTC7TqE61/JFrX/OEk0jsZbYXjiGhR7/t+XNY=') 
 ```
 Installs Opal and starts the Opal and rserve service. Changes the admin password to `$opal_password_hash`, default is the
@@ -106,7 +106,7 @@ url of the opal REST server. `$opal_release` is the opal branch to install from 
 ### opal::project
 
 ```puppet
-define opal::project($opal_path = '/usr/bin/opal', $opal_password = 'password', $opal_url='http://localhost:8080', $database="mongodb", $description)
+define opal::project($opal_path = '/usr/bin/opal', $opal_password = 'password', $opal_url='https://localhost:8443', $database="mongodb", $description)
 ```
 Add a project to Opal. `$opal_path` is the path to the opal bin. `$opal_password` is the opal admin password. `$database` 
 is the database for the project to use, must be a `opal::database` resource (i.e. `Opal::Database['mongodb']`). `$description` 
