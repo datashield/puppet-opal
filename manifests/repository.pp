@@ -31,12 +31,13 @@ class opal::repository ($release = 'stable') {
         location       => 'https://obiba.jfrog.io/artifactory/debian-local',
         release        => '',
         repos          => 'all main',
-#        key            => { 'server' => 'https://www.obiba.org/assets/obiba-pub.pem', 'id' => '0E52FB02F890D3058B6C964D8576AC157B0A831B' },
+        key            => { 'server' => 'https://www.obiba.org/assets/obiba-pub.pem', 'id' => '0E52FB02F890D3058B6C964D8576AC157B0A831B' },
+#        key            => { 'server' => 'https://www.obiba.org/assets/obiba-pub.pem', 'id' => '7B0A831B' },
 #        key            => '0E52FB02F890D3058B6C964D8576AC157B0A831B',
         include        => { 'src' => false },
         notify         => Class['apt::update'],
 #        allow_unsigned => false,
-        allow_unsigned => true,
+#        allow_unsigned => true,
       }
     }
     'Centos': {
